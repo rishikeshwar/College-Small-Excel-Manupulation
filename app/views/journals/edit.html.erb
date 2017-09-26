@@ -1,0 +1,42 @@
+<%= form_tag(journal_path(@journal.id), method: :PATCH) do %>
+<fieldset>
+	<legend>Please Enter below information</legend>
+	<h1><%= @journal.id %></h1>
+	<div class="container">
+		<%= label_tag :title, "Title of the papers"%>
+		<%= text_area_tag :title, @journal.title, :size => "30" %>
+		<br> <br>
+		<%= label_tag :author, "Authors"%>
+		<%= text_area_tag :author, @journal.author, :size => "30" %>
+		<br> <br>
+		<%= label_tag :status, "Whether submitted/ accepted/ published"%>
+		<%= text_area_tag :status, @journal.status, :size => "30" %>
+		<br> <br>
+		<%= label_tag :JorC, "Journal or Conference"%>
+		<%= text_area_tag :JorC, @journal.JorC, :size => "30" %>
+		<br> <br>
+		<%= label_tag :scopus, "Whether appeared in Scopus or PubMed"%>
+		<%= text_area_tag :scopus, @journal.scopus, :size => "30" %>
+		<br> <br>
+		<%= label_tag :affiliations, "Affiliations Used"%>
+		<%= text_area_tag :affiliations, @journal.affiliations, :size => "30" %>
+		<br> <br>
+		<%= label_tag :amritapapers, "Numbe of Amrita papers citied"%>
+		<%= text_area_tag :amritapapers, @journal.amritapapers, :size => "30" %>
+		<br> <br>
+		<%= label_tag :coauthor, "CoAuthors (Phd/PG/UG) Student"%>
+		<%= text_area_tag :coauthor, @journal.coauthor, :size => "30" %>
+		<br> <br>
+		<%= label_tag :communicated, "Whether Communicated to 5"%>
+		<%= text_area_tag :communicated, @journal.communicated, :size => "30" %>
+		<br> <br>
+		<%= label_tag :paperbefore, "Is this the first paper for the faculty in the last one year"%>
+		<%= text_area_tag :paperbefore, @journal.paperbefore, :size => "30" %>
+
+	</div>
+	<div>
+		<%= submit_tag 'Submit' %>
+		<%= link_to 'EDIT', @journal, method: :put %>
+	</div>
+</fieldset>
+<% end %>

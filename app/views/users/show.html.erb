@@ -1,0 +1,57 @@
+
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+<div style="overflow-x:scroll;">
+    <table class="table table-striped table-bordered table-hover .table-responsive">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Change</th>
+          <th>Id</th>
+          <th>Title of the Papers</th>
+          <th>Authors</th>
+          <th>Submitted/Accepted/Published</th>
+          <th>Conference or Journal</th>
+          <th>Scopus Appeared</th>
+          <th>Affiliations Used</th>
+          <th>Amrita Papers Cited</th>
+          <th>CoAuthors (Phd/PG/UG)</th>
+          <th>Communicated to 5</th>
+          <th>First paper in the past one year</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @journals.each do |journal| %>
+          <tr>
+
+            <td><%= link_to "Edit", edit_journal_path(journal.id), method: :get%></td>
+            <td><%= journal.id %></td>
+            <td><%= journal.title %></td>
+            <td><%= journal.author %></td>
+            <td><%= journal.status %></td>
+            <td><%= journal.JorC %></td>
+            <td><%= journal.scopus %></td>
+            <td><%= journal.affiliations %></td>
+            <td><%= journal.amritapapers %></td>
+            <td><%= journal.coauthor %></td>
+            <td><%= journal.communicated %></td>
+            <td><%= journal.paperbefore %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to 'New User', new_user_path %>
+  </div>
+</div>
