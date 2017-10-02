@@ -1,38 +1,27 @@
-
-<div class="container">
-<%= form_for(user) do |f| %>
-  <% if flash[:alert] %>
+<%= stylesheet_link_tag "loginpage.scss" %>
+<%= javascript_include_tag "aloginpage.js", "data-turbolinks-track" => true  %>
+<div class="wrapper new-session">
+      
+  <body data-pagebkg="alogin">
+  <%= form_for user, url: {action: "create"}, html: {class: "login"} do |f| %>
+  <p class="title">Sign Up</p>
+    <% if flash[:alert] %>
     <p id = "notice"> <%= flash[:alert] %> </p>
-  <% end %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
+    <%= f.text_field :name, :value => params[:name], :placeholder => "Username" %>
+    <i class="fa fa-user"></i>
+    <%= f.password_field :password, :value => params[:password], :placeholder => "Password" %>
+    <i class="fa fa-key"></i>
+    <%= f.password_field :password_confirmation, :value => params[:password_confirmation], :placeholder => "Password Confirmation" %>
+    <i class="fa fa-key"></i>
+    <a href="#">Forgot your password?</a>
+    <%= button_tag do %>
+      <i class="spinner"></i> Submit 
+    <% end %>
+    
+  <% end %>
+  
+  <footer><a target="blank" href="http://boudra.me/"></a></footer>
+  </p>
+  </body>
 </div>

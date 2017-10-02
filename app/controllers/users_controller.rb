@@ -6,6 +6,11 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    @journalsaccepted = Journal.where("status like ?", "%ccept%")
+    @journalspublished = Journal.where("status like ?", "%ublish%")
+    @journalsrejected = Journal.where("status like ?", "%eject%")
+    @journalspresented = Journal.where("status like ?", "%resent%")
+    @journalssubmitted = Journal.where("status like ?", "%ubmitte%")
     @user = User.find(session[:user_id])
     if @user.name != 'rishikeshwar'
       redirect_to login_url

@@ -1,6 +1,6 @@
 $primary: #2196F3;
 
-body {
+body[data-pagebkg="alogin"]{
   font-family: "Open Sans", sans-serif;
   height: 100vh;
   background: url("https://i.imgur.com/HgflTDf.jpg") 50% fixed;
@@ -29,7 +29,7 @@ body {
 
 
 .login {
-  margin-top: 100px;
+  margin-top: 50px;
   border-radius: 2px 2px 5px 5px;
   padding: 10px 20px 20px 20px;
   width: 90%;
@@ -72,7 +72,7 @@ body {
     border: 1px solid #ddd;
     transition: border-width 0.2s ease;
     border-radius: 2px;
-    color: #ccc;
+    color: #555;
     
     &+ i.fa {
         color: #fff;

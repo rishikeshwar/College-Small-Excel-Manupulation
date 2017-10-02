@@ -9,20 +9,36 @@ class JournalsController < ApplicationController
       
     	workbook = RubyXL::Parser.parse("/home/rishikeshwar/ri.xlsx")
     	pos = 0
-    	6.upto(100) do |i| 
+    	start = 0
+    	0.upto(10000) do |i|
+    		print "#{workbook[0][i][0].value}"
+    		if workbook[0][i][0].value == 1
+    			start = i
+    			break
+    		end
+    	end
+
+
+    	@ending = Journal.order('id DESC').first
+    	endo = 0
+    	start.upto(10000)
+
+    	print "#{start}"
+    	start.upto(120) do |i| 
     		if @journal.id == workbook[0][i][0].value.to_i
     			pos = i
     			break
     		end
     	end
     	puts "coming coming #{pos}"
-		if @journal.title != params[:title]
+		if @journal.title.squish != params[:title].squish
 			@journal.update_attribute(:title, "#{params[:title]}")
+			print "#{pos}"
 			workbook[0][pos][1].change_contents("#{params[:title]}", workbook['Sheet1'][pos][1].formula)
 			workbook[0][pos][1].change_fill(rgb = 'cc0000')
 		end
 
-		if @journal.author != params[:author]
+		if @journal.author.squish != params[:author].squish
 			@journal.update_attribute(:author, "#{params[:author]}")
 			workbook[0][pos][2].change_contents("#{params[:author]}", workbook['Sheet1'][pos][2].formula)
 			workbook[0][pos][2].change_fill(rgb = 'cc0000')
@@ -46,7 +62,7 @@ class JournalsController < ApplicationController
 			workbook[0][pos][5].change_fill(rgb = 'cc0000')
 		end
 
-		if @journal.affiliations != params[:affiliations]
+		if @journal.affiliations.squish != params[:affiliations].squish
 			@journal.update_attribute(:affiliations, "#{params[:affiliations]}")
 			workbook[0][pos][6].change_contents("#{params[:affiliations]}", workbook['Sheet1'][pos][6].formula)
 			workbook[0][pos][6].change_fill(rgb = 'cc0000')
