@@ -2,7 +2,8 @@ class JournalsController < ApplicationController
 	def edit 
 		@journal = Journal.find(params[:id])
 	end
-
+    
+    
 	def update 
 		@journal = Journal.find(params[:id])
 		require 'rubyXL'
@@ -21,15 +22,16 @@ class JournalsController < ApplicationController
 
     	@ending = Journal.order('id DESC').first
     	endo = 0
-    	start.upto(10000)
 
     	print "#{start}"
-    	start.upto(120) do |i| 
+    	start.upto(1000) do |i| 
     		if @journal.id == workbook[0][i][0].value.to_i
     			pos = i
     			break
     		end
     	end
+        
+        
     	puts "coming coming #{pos}"
 		if @journal.title.squish != params[:title].squish
 			@journal.update_attribute(:title, "#{params[:title]}")

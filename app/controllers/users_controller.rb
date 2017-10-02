@@ -19,6 +19,54 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+    
+  def loadstats
+      
+    @journalsaccepted = Journal.where("status like ?", "%ccept%")
+    @journalspublished = Journal.where("status like ?", "%ublish%")
+    @journalsrejected = Journal.where("status like ?", "%eject%")
+    @journalspresented = Journal.where("status like ?", "%resent%")
+    @journalssubmitted = Journal.where("status like ?", "%ubmitte%")
+      
+    require 'rubyXL'
+      
+    workbook = RubyXL::Parser.parse("/home/rishikeshwar/ri.xlsx")
+    pos = 0
+    start = 0
+    0.upto(10000) do |i|
+    	if workbook[0][i][0].value == 1
+    		start = i
+    		break
+    	end
+    end
+
+    @ending = Journal.order('id DESC').first
+    endo = 0
+    
+    start.upto(1000) do |i| 
+    	if workbook[0][i][0].value == @ending['id']
+            endo = i + 5
+    		break
+    	end
+    end
+      
+    workbook[0].add_cell(endo + 0, 1, "Accepted").change_horizontal_alignment('center')
+    workbook[0].add_cell(endo + 0, 2, "#{@journalsaccepted.length}").change_horizontal_alignment('center')
+    workbook[0].add_cell(endo + 1, 1, "Published").change_horizontal_alignment('center')
+    workbook[0].add_cell(endo + 1, 2, "#{@journalspublished.length}").change_horizontal_alignment('center')
+    workbook[0].add_cell(endo + 2, 1, "Rejected").change_horizontal_alignment('center')
+    workbook[0].add_cell(endo + 2, 2, "#{@journalsrejected.length}").change_horizontal_alignment('center')
+    workbook[0].add_cell(endo + 3, 1, "Presented").change_horizontal_alignment('center')
+    workbook[0].add_cell(endo + 3, 2, "#{@journalspresented.length}").change_horizontal_alignment('center')
+    workbook[0].add_cell(endo + 4, 1, "Submitted").change_horizontal_alignment('center')
+    workbook[0].add_cell(endo + 4, 2, "#{@journalssubmitted.length}").change_horizontal_alignment('center')
+    
+      
+    workbook.write('/home/rishikeshwar/ri.xlsx')
+    workbook = nil
+    redirect_to users_path
+  end
+
   def show
     curruser = User.find(session[:user_id])
     curruser = curruser.name.downcase

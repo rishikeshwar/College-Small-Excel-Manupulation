@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
 
   resources :users
+    
+  get 'loadstats' => 'users#loadstats'
   get 'loaddata' => 'users#loaddata'
   resources :journals
 
