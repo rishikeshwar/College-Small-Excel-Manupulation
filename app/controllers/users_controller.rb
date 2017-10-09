@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       
     require 'rubyXL'
       
-    workbook = RubyXL::Parser.parse("/home/rishikeshwar/ri.xlsx")
+    workbook = RubyXL::Parser.parse("/home/administrator/ri.xlsx")
     pos = 0
     start = 0
     0.upto(10000) do |i|
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     workbook[0].add_cell(endo + 4, 2, "#{@journalssubmitted.length}").change_horizontal_alignment('center')
     
       
-    workbook.write('/home/rishikeshwar/ri.xlsx')
+    workbook.write('/home/administrator/ri.xlsx')
     workbook = nil
     redirect_to users_path
   end
@@ -78,7 +78,7 @@ class UsersController < ApplicationController
 
     require 'rubyXL'
       
-    workbook = RubyXL::Parser.parse("/home/rishikeshwar/ri.xlsx")
+    workbook = RubyXL::Parser.parse("/home/administrator/ri.xlsx")
     workbook = workbook['Sheet1']
     puts "#{workbook[1][2].value}"
     6.upto(139) do |i|
@@ -97,6 +97,25 @@ class UsersController < ApplicationController
         @datasave.save
     end
     redirect_to users_path
+  end
+    
+  def loadfac
+      workbook = RubyXL::Parser.parse("/home/administrator/fac.xlsx")
+      1.upto(31) do |i|
+          @datasave = Facid.new
+          @datasave.colid = workbook[0][i][2].value
+          @datasave.name = workbook[0][i][3].value
+		  @datasave.save
+      end
+      redirect_to users_path
+  end
+    
+  def newJournal 
+      
+  end
+    
+  def createJournal
+    
   end
 
   # GET /users/new

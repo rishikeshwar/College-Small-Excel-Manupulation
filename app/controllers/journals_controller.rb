@@ -8,7 +8,7 @@ class JournalsController < ApplicationController
 		@journal = Journal.find(params[:id])
 		require 'rubyXL'
       
-    	workbook = RubyXL::Parser.parse("/home/rishikeshwar/ri.xlsx")
+    	workbook = RubyXL::Parser.parse("/home/administrator/ri.xlsx")
     	pos = 0
     	start = 0
     	0.upto(10000) do |i|
@@ -94,7 +94,7 @@ class JournalsController < ApplicationController
 			workbook[0][pos][10].change_fill(rgb = 'cc0000')
 		end
 		@user = User.find(session[:user_id])
-		workbook.write('/home/rishikeshwar/ri.xlsx')
+		workbook.write('/home/administrator/ri.xlsx')
 		workbook = nil
 		redirect_to user_path(session[:user_id])
 	end

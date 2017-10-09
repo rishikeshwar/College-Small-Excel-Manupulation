@@ -1,0 +1,2 @@
+class Facid < ApplicationRecord
+end

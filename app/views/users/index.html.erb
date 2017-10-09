@@ -24,12 +24,10 @@
 
 <br>
 
-<%= link_to 'Upload Data', loaddata_path %>
-<%= link_to 'Download Stats to CSS file', loadstats_path %>
-
+<%= link_to 'Upload Journal Data from XLSX file', loaddata_path %>
+<br>
+<%= link_to 'Download Stats to XLSX file', loadstats_path %>
+<br>
+<%= link_to 'Upload Faculty Ids from XLSX file', loadfac_path %>
+<br>
 <%= link_to 'New User', new_user_path %>
-
-<h1>No. of Journals Accepted<%= @journalsaccepted.length %></h1>
-<h1>No. of Journals <%= @journalspresented.length %></h1>
-<h1><%= @journalssubmitted.length %></h1>
-<h1><%= @journalspublished.length %></h1>

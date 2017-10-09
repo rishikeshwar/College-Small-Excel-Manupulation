@@ -1,17 +1,18 @@
 Rails.application.routes.draw do
-  #get 'admin/index'
-
-  #get 'sessions/new'
-
-  get 'sessions/create'
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+    get 'sessions/create'
 
   get 'sessions/destroy'
-
-  resources :users
     
   get 'loadstats' => 'users#loadstats'
   get 'loaddata' => 'users#loaddata'
+  get 'loadfac' => 'users#loadfac'
+  
   resources :journals
+  resources :users do 
+      get 'newJournal' => :newJournal
+      post 'newJournal' => :createJournal
+  end
 
   get 'admin' => 'admin#index'
   controller :sessions do
@@ -20,6 +21,6 @@ Rails.application.routes.draw do
   	delete 'logout' => :destroy
   end
 
-  root 'admin#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'sessions#new'
+# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
